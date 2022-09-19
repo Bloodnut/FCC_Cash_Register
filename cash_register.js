@@ -1,7 +1,9 @@
 function checkCashRegister(price, cash, cid) {
-    //Check vars work...
+    // Check vars work...
     checkInputVars(price, cash, cid);
-    // totalCashInDraw(cid);
+    
+    // Check if enough money in draw to even consider giving change
+    checkCashInDraw(price, cash, cid);
 }
 
 
@@ -13,4 +15,19 @@ function checkInputVars (inputPrice, inputCash, inputCid) {
     console.log("The cash: " + inputCash);
     console.log("The cid: ");
     console.table(inputCid);
+}
+
+function checkCashInDraw (productPrice, customerCash, registerTally){
+    let totalCash = 0;
+    for (let i = 0; i < registerTally.length; i++){
+        totalCash += registerTally[i][1];
+    }
+    let totalCashRounded = totalCash.toFixed(2);
+    console.log("Total Cash in the draw = " + totalCashRounded);
+    
+    let changeNeeded = customerCash - productPrice;
+    totalCashRounded > changeNeeded ? 
+    console.log(`Yep, we have more cash in the till than your change: $${changeNeeded}... Need to check we have the CORRECT change though`) :
+    console.log(`We literally don't have enough money to cover your change: $${changeNeeded}`);
+    return(changeNeeded);
 }
