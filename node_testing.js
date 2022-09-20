@@ -6,7 +6,7 @@ function checkCashRegister(price, cash, cid) {
     checkCashInDraw(price, cash, cid);
 }
 
-checkCashRegister(19.5, 20, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]);
+checkCashRegister(19.5, 19.5, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]);
 
 function checkCashInDraw (productPrice, customerCash, registerTally){
     let totalCash = 0;
@@ -17,10 +17,21 @@ function checkCashInDraw (productPrice, customerCash, registerTally){
     console.log("Total Cash in the draw = " + totalCashRounded);
     
     let changeNeeded = customerCash - productPrice;
-    totalCashRounded > changeNeeded ? 
-    console.log(`Yep, we have more cash in the till than your change: $${changeNeeded}... Need to check we have the CORRECT change though`) :
-    console.log(`We literally don't have enough money to cover your change: $${changeNeeded}`);
-    return(changeNeeded);
+    let cashDifference = totalCashRounded - changeNeeded;
+
+    // determine if we need to calculate change, respond accordingly
+    if (cashDifference < 0){
+        console.log(`We literally don't have enough money to cover your change: $${changeNeeded}`);
+        // return object line; 
+    }
+    else if(cashDifference = 0){
+        console.log(`We have the EXACT amount you need: $${changeNeeded}`);
+        // return object line;
+    }
+    else{
+        console.log(`Yep, we have more cash in the till than your change: $${changeNeeded}... Need to check we have the CORRECT change though`);
+    }
+    // move on 
 }
 
 function checkInputVars (inputPrice, inputCash, inputCid) {
