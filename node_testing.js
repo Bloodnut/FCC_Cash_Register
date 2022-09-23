@@ -6,7 +6,7 @@ function checkCashRegister(price, cash, cid) {
     checkCashInDraw(price, cash, cid);
 }
 
-checkCashRegister(19.5, 600000, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]);
+checkCashRegister(335.41, 670.82, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]);
 
 function checkCashInDraw (productPrice, customerCash, registerTally){
     // Determine amount in draw
@@ -37,12 +37,15 @@ function checkCashInDraw (productPrice, customerCash, registerTally){
     }
     else if(cashDifference == 0){
         console.log(`We have the EXACT amount you need: $${changeNeeded}`);
-        // return object line;
+        fccObject["status"] = "CLOSED";
+        fccObject["change"] = totalCashRounded;
+        console.log(`The object value is: ` + JSON.stringify(fccObject));
+        return fccObject;
     }
     else{
         console.log(`Yep, we have more cash in the till than your change: $${changeNeeded}... Need to check we have the CORRECT change though`);
     }
-    // move on 
+    // move on with checks
 }
 
 function checkInputVars (inputPrice, inputCash, inputCid) {
