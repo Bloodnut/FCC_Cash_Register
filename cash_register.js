@@ -18,6 +18,7 @@ function checkInputVars (inputPrice, inputCash, inputCid) {
 }
 
 function checkCashInDraw (productPrice, customerCash, registerTally){
+    // Determine amount in draw
     let totalCash = 0;
     for (let i = 0; i < registerTally.length; i++){
         totalCash += registerTally[i][1];
@@ -25,9 +26,33 @@ function checkCashInDraw (productPrice, customerCash, registerTally){
     let totalCashRounded = totalCash.toFixed(2);
     console.log("Total Cash in the draw = " + totalCashRounded);
     
+    // build the object
+    const fccObject = {
+        status: "",
+        change: ""
+    };
+    // Evaluate difference between change needed and money in till
     let changeNeeded = customerCash - productPrice;
-    totalCashRounded > changeNeeded ? 
-    console.log(`Yep, we have more cash in the till than your change: $${changeNeeded}... Need to check we have the CORRECT change though`) :
-    console.log(`We literally don't have enough money to cover your change: $${changeNeeded}`);
-    return(changeNeeded);
+    let cashDifference = totalCashRounded - changeNeeded;
+
+    // determine if we need to calculate change, respond accordingly... we may need to revisit this if we don't have the right COINS for change too
+    if (cashDifference < 0){
+        console.log(`We literally don't have enough money to cover your change: $${changeNeeded}`);
+        fccObject["status"] = "INSUFFICIENT_FUNDS";
+        fccObject["change"] = [];
+        console.log(`The object value is: ` + JSON.stringify(fccObject));
+        return fccObject;
+        // return object line; 
+    }
+    else if(cashDifference == 0){
+        console.log(`We have the EXACT amount you need: $${changeNeeded}`);
+        fccObject["status"] = "CLOSED";
+        fccObject["change"] = totalCashRounded;
+        console.log(`The object value is: ` + JSON.stringify(fccObject));
+        return fccObject;
+    }
+    else{
+        console.log(`Yep, we have more cash in the till than your change: $${changeNeeded}... Need to check we have the CORRECT change though`);
+    }
+    // move on with checks
 }

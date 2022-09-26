@@ -44,6 +44,29 @@ function checkCashInDraw (productPrice, customerCash, registerTally){
     }
     else{
         console.log(`Yep, we have more cash in the till than your change: $${changeNeeded}... Need to check we have the CORRECT change though`);
+        /* do-while to evaluate these numbers
+        do {
+            if (changeCounter >= 100) {
+                // check registerTally["ONE HUNDRED"] >= 100
+                // decrease changeCounter by 100
+                // record the denomination used somehow
+                // decrease registerTally["ONE HUNDRED"] BY 100
+            }
+            else if (changeCounter >= 20) {
+                // check registerTally["TWENTY"] >= 20
+                // decrease changeCounter by 20
+                // record the denomination used 
+            }
+            else if (changeCounter >= 10) {
+                // etc etc 
+            }
+            // and the rest of them going down
+            else {
+                // pennies
+            }
+        }
+        while (changeCounter > 0);
+        */
     }
     // move on with checks
 }
@@ -54,3 +77,5 @@ function checkInputVars (inputPrice, inputCash, inputCid) {
     console.log("The cid: ");
     console.table(inputCid);
 }
+
+function check100s ()
