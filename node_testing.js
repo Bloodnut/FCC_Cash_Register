@@ -53,7 +53,7 @@ function checkCashInDraw (productPrice, customerCash, registerTally){
         // do-while to evaluate these numbers
         do {
             if (changeCounter >= 100) {
-                if (registerTally["ONE HUNDRED"] >= 100){
+                if (registerTally["ONE HUNDRED"][1] >= 100){
                     changeCounter -= 100;
                     cashUsedArray["ONE HUNDRED"] += 100;
                     registerTally["ONE HUNDRED"] -= 100;
