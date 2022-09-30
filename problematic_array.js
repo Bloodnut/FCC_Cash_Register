@@ -10,9 +10,9 @@ checkCashRegister(335.41, 450, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1]
 
 function checkCashInDraw (productPrice, customerCash, registerTally){
     // Create a copy of my array
-    let cashUsedArray = registerTally.map(function(arr){
-        return arr.slice();
-    });
+    let cashUsedArray = [...registerTally];
+    console.log("Here's my register tally BEFORE THE cash used array re-zero LOOP: ");
+    console.table(registerTally);
     let totalCash = 0;
 
     // get total cash, re-zero cashUsed table
@@ -20,11 +20,8 @@ function checkCashInDraw (productPrice, customerCash, registerTally){
         totalCash += registerTally[i][1];
         cashUsedArray[i][1] = 0;
     }
-
-    console.log("Here's my register tally array AFTER the re-zero loop... check it isn't 0's: ");
+    console.log("Here's my register tally array AFTER the re-zero loop... why is it 0's? ");
     console.table(registerTally);
-    console.log("Here's my cash used array After re-zero: ");
-    console.table(cashUsedArray);
     let totalCashRounded = totalCash.toFixed(2);
     console.log("Total Cash in the draw = " + totalCashRounded);
     
@@ -39,6 +36,8 @@ function checkCashInDraw (productPrice, customerCash, registerTally){
 
     // Establish a changeCounter var (which is the same as changeNeeded, but separate for now)
     let changeCounter = 0;
+    console.log("Here's my cash used array BEFORE THE LOOP: ");
+    console.table(cashUsedArray);
     
     // determine if we need to calculate change, respond accordingly... we may need to revisit this if we don't have the right COINS for change too
     if (cashDifference < 0){
