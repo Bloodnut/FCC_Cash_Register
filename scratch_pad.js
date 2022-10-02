@@ -10,12 +10,13 @@ console.log(JSON.stringify(myObject));
 */
 
 function doStuffToArray(inputArray){
-    let newArray = [];
+    // let newArray = [];
     let tally = 0;
-    
-    newArray = inputArray.map(function(arr){
+
+    const newArray = inputArray.map(function(arr){
         return arr.slice();
     });
+    // const newArray = arrayCopy(inputArray);
     // get total cash, re-zero cashUsed table
     for (let i = 0; i < inputArray.length; i++){
         tally += inputArray[i][1];
@@ -27,5 +28,13 @@ function doStuffToArray(inputArray){
     console.log("aaand Here's my input array AFTER doing stuff");
     console.table(inputArray);
 }
+
+// function arrayCopy(arr){
+//     inputArray.map(function(arr){
+//         return arr.slice();
+//     }
+// )};
+
+// const arrayCopy = arr=> JSON.parse(JSON.stringify(arr));
 
 doStuffToArray([["first thing", 1], ["second thing", 323], ["Third thing", 900], ["Fourth thing", 7661]]);

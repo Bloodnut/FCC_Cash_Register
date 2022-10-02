@@ -21,10 +21,6 @@ function checkCashInDraw (productPrice, customerCash, registerTally){
         cashUsedArray[i][1] = 0;
     }
 
-    console.log("Here's my register tally array AFTER the re-zero loop... check it isn't 0's: ");
-    console.table(registerTally);
-    console.log("Here's my cash used array After re-zero: ");
-    console.table(cashUsedArray);
     let totalCashRounded = totalCash.toFixed(2);
     console.log("Total Cash in the draw = " + totalCashRounded);
     
@@ -37,8 +33,8 @@ function checkCashInDraw (productPrice, customerCash, registerTally){
     let changeNeeded = customerCash - productPrice;
     let cashDifference = totalCashRounded - changeNeeded;
 
-    // Establish a changeCounter var (which is the same as changeNeeded, but separate for now)
-    let changeCounter = 0;
+    // Establish a changeCounter var to track deductions
+    let changeCounter = changeNeeded;
     
     // determine if we need to calculate change, respond accordingly... we may need to revisit this if we don't have the right COINS for change too
     if (cashDifference < 0){
@@ -60,62 +56,71 @@ function checkCashInDraw (productPrice, customerCash, registerTally){
         console.log(`Yep, we have more cash in the till than your change: $${changeNeeded}... Need to check we have the CORRECT change though`);
         // do-while to evaluate these numbers
         do {
-            if (changeCounter >= 100 && registerTally["ONE HUNDRED"][1] >= 100){ 
+            console.log(`${changeCounter}`);
+            if (changeCounter >= 100 && registerTally[0][1] >= 100){ 
                 changeCounter -= 100;
-                cashUsedArray["ONE HUNDRED"][1] += 100;
-                registerTally["ONE HUNDRED"][1] -= 100;
+                cashUsedArray[0][1] += 100;
+                registerTally[0][1] -= 100;
+                console.log("took one ONE HUNDRED out");
                 
                 // 1. check registerTally["ONE HUNDRED"] >= 100
                 // 2. decrease changeCounter by 100
                 // 3. record the denomination used somehow
                 // 4. decrease registerTally["ONE HUNDRED"] BY 100
             }
-            else if (changeCounter >= 20 && registerTally["TWENTY"][1] >= 20) {
+            else if (changeCounter >= 20 && registerTally[1][1] >= 20) {
                 changeCounter -= 20;
-                cashUsedArray["TWENTY"][1] += 20;
-                registerTally["TWENTY"][1] -= 20; 
+                cashUsedArray[1][1] += 20;
+                registerTally[1][1] -= 20; 
+                console.log("took one ONE TWENTY out");
             }
-            else if (changeCounter >= 10 && registerTally["TEN"][1] >= 10) {
+            else if (changeCounter >= 10 && registerTally[2][1] >= 10) {
                 changeCounter -= 10;
-                cashUsedArray["TWENTY"][1] += 10;
-                registerTally["TWENTY"][1] -= 10; 
+                cashUsedArray[2][1] += 10;
+                registerTally[2][1] -= 10; 
+                console.log("took one TEN out");
             }
-            else if (changeCounter >= 5 && registerTally["FIVE"][1] >= 5) {
+            else if (changeCounter >= 5 && registerTally[3][1] >= 5) {
                 changeCounter -= 5;
-                cashUsedArray["FIVE"][1] += 5;
-                registerTally["FIVE"][1] -= 5; 
+                cashUsedArray[3][1] += 5;
+                registerTally[3][1] -= 5; 
+                console.log("took one FIVE out");
             }
-            else if (changeCounter >= 1 && registerTally["ONE"][1] >= 1) {
+            else if (changeCounter >= 1 && registerTally[4][1] >= 1) {
                 changeCounter -= 1;
-                cashUsedArray["FIVE"][1] += 1;
-                registerTally["FIVE"][1] -= 1; 
+                cashUsedArray[4][1] += 1;
+                registerTally[4][1] -= 1; 
+                console.log("took one ONE out");
             }
-            else if (changeCounter >= 0.25 && registerTally["QUARTER"][1] >= 0.25) {
+            else if (changeCounter >= 0.25 && registerTally[5][1] >= 0.25) {
                 changeCounter -= 0.25;
-                cashUsedArray["QUARTER"][1] += 0.25;
-                registerTally["QUARTER"][1] -= 0.25; 
+                cashUsedArray[5][1] += 0.25;
+                registerTally[5][1] -= 0.25; 
+                console.log("took one QUARTER out");
             }
-            else if (changeCounter >= 0.1 && registerTally["DIME"][1] >= 0.1) {
+            else if (changeCounter >= 0.1 && registerTally[6][1] >= 0.1) {
                 changeCounter -= 0.1;
-                cashUsedArray["DIME"][1] += 0.1;
-                registerTally["DIME"][1] -= 0.1; 
+                cashUsedArray[6][1] += 0.1;
+                registerTally[6][1] -= 0.1; 
+                console.log("took one DIME out");
             }
-            else if (changeCounter >= 0.05 && registerTally["NICKEL"][1] >= 0.05) {
+            else if (changeCounter >= 0.05 && registerTally[7][1] >= 0.05) {
                 changeCounter -= 0.05;
-                cashUsedArray["NICKEL"][1] += 0.05;
-                registerTally["NICKEL"][1] -= 0.05; 
+                cashUsedArray[7][1] += 0.05;
+                registerTally[7][1] -= 0.05; 
+                console.log("took one NICKEL out");
             }
-            // and the rest of them going down
-            else if (changeCounter >= 0.01 && registerTally["PENNY"][1] >= 0.01) {
+            else if (changeCounter >= 0.01 && registerTally[8][1] >= 0.01) {
                 changeCounter -= 0.01;
-                cashUsedArray["PENNY"][1] += 0.01;
-                registerTally["PENNY"][1] -= 0.01; 
+                cashUsedArray[8][1] += 0.01;
+                registerTally[8][1] -= 0.01; 
+                console.log("took one PENNY out");
             }
         }
-        while (changeCounter > 0);
-        console.log("Here's my cash used array after everything: ");
+        while (changeCounter = 0);
+        console.log("Here's my cash used array after everything was deducted: ");
         console.table(cashUsedArray);
-        console.log("Here's my register tally after everything: ");
+        console.log("Here's my register tally after everything was deducted: ");
         console.table(registerTally);
     }
     // move on with checks
@@ -124,7 +129,7 @@ function checkCashInDraw (productPrice, customerCash, registerTally){
 function checkInputVars (inputPrice, inputCash, inputCid) {
     console.log("Here are my input vars \nThe price: " + inputPrice);
     console.log("The cash: " + inputCash);
-    console.log("The cid: ");
-    console.table(inputCid);
+    // console.log("The cid: ");
+    // console.table(inputCid);
 }
 

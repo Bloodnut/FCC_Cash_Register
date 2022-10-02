@@ -20,8 +20,16 @@ function checkInputVars (inputPrice, inputCash, inputCid) {
 function checkCashInDraw (productPrice, customerCash, registerTally){
     // Determine amount in draw
     let totalCash = 0;
+
+    // Create a copy of my array
+    let cashUsedArray = registerTally.map(function(arr){
+        return arr.slice();
+    });
+
+    // tally register money, zer0 amounts for new array
     for (let i = 0; i < registerTally.length; i++){
         totalCash += registerTally[i][1];
+        cashUsedArray[i][1] = 0;
     }
     let totalCashRounded = totalCash.toFixed(2);
     console.log("Total Cash in the draw = " + totalCashRounded);
