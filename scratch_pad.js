@@ -27,6 +27,7 @@ function doStuffToArray(inputArray){
     console.table(newArray);
     console.log("aaand Here's my input array AFTER doing stuff");
     console.table(inputArray);
+    console.log(inputArray);
 }
 
 // function arrayCopy(arr){
