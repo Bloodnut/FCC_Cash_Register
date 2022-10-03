@@ -96,14 +96,14 @@ function checkCashInDraw (productPrice, customerCash, registerTally){
             }
             else if (changeCounter >= 0.25 && registerTally[3][1] >= 0.25) {
                 changeCounter = (changeCounter - 0.25).toFixed(2);
-                cashUsedArray[3][1] = parseFloat((cashUsedArray[3][1] + 0.25).toFixed(1));
-                registerTally[3][1] = parseFloat((registerTally[3][1] - 0.25).toFixed(1)); 
+                cashUsedArray[3][1] = parseFloat((cashUsedArray[3][1] + 0.25).toFixed(2));
+                registerTally[3][1] = parseFloat((registerTally[3][1] - 0.25).toFixed(2)); 
                 console.log("took one QUARTER out");
             }
             else if (changeCounter >= 0.1 && registerTally[2][1] >= 0.1) {
                 changeCounter = (changeCounter - 0.1).toFixed(2);
                 cashUsedArray[2][1] = parseFloat((cashUsedArray[2][1] + 0.1).toFixed(1));
-                registerTally[2][1] = parseFloat((registerTally[2][1] - 0.1).toFixed(1)); 
+                registerTally[2][1] = parseFloat((registerTally[2][1] - 0.1).toFixed(2)); 
                 console.log("took one DIME out");
             }
             else if (changeCounter >= 0.05 && registerTally[1][1] >= 0.05) {
